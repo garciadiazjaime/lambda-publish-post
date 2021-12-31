@@ -18,7 +18,7 @@ async function getBuffer(url) {
   })
 };
 
-async function publishPost(imageBuffer) {
+async function publishPost(imageBuffer, caption) {
   if (!imageBuffer) {
     return null
   }
@@ -29,28 +29,33 @@ async function publishPost(imageBuffer) {
 
   await ig.publish.photo({
     file: imageBuffer,
-    caption: 'here we go, and the light was made',
+    caption,
   });
 
   return true
 }
 
 exports.handler = async (event) => {
-  const { imageURL } = event.queryStringParameters
-  if (!imageURL) {
+  const {
+    imageURL,
+    caption
+  } = event.queryStringParameters
+  if (!imageURL || !caption) {
     return {
       statusCode: 500,
-      body: JSON.stringify('imageURL empty'),
+      body: JSON.stringify('EMPTY_PARAMS'),
     }
   }
 
   const url = decodeURIComponent(imageURL)
   const imageBuffer = await getBuffer(url)
-  const published = await publishPost(imageBuffer)
+  const published = await publishPost(imageBuffer, caption)
 
   return {
     statusCode: 200,
-    body: JSON.stringify({imageURL:url}),
-    published,
+    body: JSON.stringify({
+      imageURL: url,
+      published
+    }),
   }
 };
