@@ -3,7 +3,7 @@ const { handler: lambda } = require('./index')
 async function main() {
   const event = {
     queryStringParameters: {
-      imageURL: 'http://res.cloudinary.com/mintitmedia/image/upload/v1640927236/feedmechicago/2740594444254477998_43124743.jpg'
+      imageURL: 'https://res.cloudinary.com/mintitmedia/image/upload/v1640930832/feedmechicago/2740617962824618112_31374150.jpg'
     }
   }
 
