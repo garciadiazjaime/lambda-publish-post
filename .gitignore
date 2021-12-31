@@ -1,0 +1,11 @@
+node_modules
+*.DS_Store
+npm-debug.log
+secrets.txt
+instagram-tijuana.json
+data
+public
+cookies.json
+post.jpg
+newrelic_agent.log
+lambda.zip
